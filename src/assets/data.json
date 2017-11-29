@@ -1,0 +1,36 @@
+{
+    "rooms": [
+      {
+        "name": "Sala 1",
+        "seatsNumber": 10,
+        "location" : "Calle 100",
+        "lastCleaning" : "22/07/1994",
+        "isVacant": true, 
+        "imageURL": "imageURL"
+      },
+      {
+        "name": "Sala 2",
+        "seatsNumber": 5,
+        "location" : "Calle 100",
+        "lastCleaning" : "22/07/1994",
+        "isVacant": false, 
+        "imageURL": "imageURL"
+      },
+      {
+        "name": "Sala Colores",
+        "seatsNumber": 10,
+        "location" : "Piso 2",
+        "lastCleaning" : "22/07/1994",
+        "isVacant": true, 
+        "imageURL": "imageURL"
+      },
+      {
+        "name": "Salón de clases",
+        "seatsNumber": 100,
+        "location" : "Piso 1",
+        "lastCleaning" : "22/07/2017",
+        "isVacant": false, 
+        "imageURL": "imageURL"
+      }
+    ]
+  }
