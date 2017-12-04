@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label inline>Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="room.name" required>{{room.name}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-range [(ngModel)]="room.seatsNumber" color="primary" pin="true" required>
+        <ion-label inline range-left>Asientos:</ion-label>
+        <ion-label inline range-right><ion-badge color="primary" required>{{room.seatsNumber}}</ion-badge></ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label inline>Ubicación</ion-label>
+      <ion-select [(ngModel)]="room.location">
+        <ion-option *ngFor="let location of locations" [value]="location">{{location}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label inline>Última limpieza</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="room.lastCleaning" required>{{room.lastCleaning}}</ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label inline>¿Está libre?</ion-label>
+      <ion-toggle [(ngModel)]="room.isVacant" color="secondary" required></ion-toggle>
+    </ion-item>
+    <br>
+    <br>
+    <button ion-button full color="secondary" (click)="createOrEdit(room)">Aceptar</button>
+    <button ion-button full color="danger" (click)="goBack()">Cancelar</button>
+  </ion-list>
+</ion-content>

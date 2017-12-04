@@ -1,14 +1,41 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Listado de Salas
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar (ionInput)="searchRooms($event)"></ion-searchbar>
+  <p *ngIf="noDataFound">No hay salas cargadas en el sistema</p>
+  <ion-list *ngFor="let room of roomList">
+    <ion-item-sliding>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="">
+        </ion-thumbnail>
+        <h2>{{room.name}}</h2>
+        <p>Ubicación: {{room.location}}</p>
+        <p>Asientos:  {{room.seatsNumber}}</p>
+        <p>Limpieza:  {{room.lastCleaning}}</p>
+        <ion-badge *ngIf="!room.isVacant" color="danger">Ocupada</ion-badge>
+        <ion-badge *ngIf="room.isVacant" color="secondary">Libre</ion-badge>
+        <ion-icon name="md-star" color="favorite" item-end *ngIf="room.isFavorite"></ion-icon>
+      </ion-item>
+      <ion-item-options side="right">
+          <button ion-button large (click)="addOrEditRoom(room)"><ion-icon name="md-create"></ion-icon></button>
+          <button ion-button large color="favorite" *ngIf="!room.isFavorite" (click)="toogleFavorite(room, true)"><ion-icon name="md-star"></ion-icon></button>
+          <button ion-button large color="unfavorite" *ngIf="room.isFavorite" (click)="toogleFavorite(room, false)"><ion-icon name="md-star"></ion-icon></button>
+          <button ion-button large color="danger" (click)="delete(room)"><ion-icon name="md-trash"></ion-icon></button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="addOrEditRoom()"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
+
