@@ -10,6 +10,8 @@ import { HttpRoomProvider } from '../providers/http-room/http-room';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateEditPageModule } from '../pages/create-edit/create-edit.module';
 import { HttpLocationProvider } from '../providers/http-location/http-location';
+import { HeaderColor } from '@ionic-native/header-color';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { HttpLocationProvider } from '../providers/http-location/http-location';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpRoomProvider,
-    HttpLocationProvider
+    HttpLocationProvider,
+    HeaderColor,
+    ImagePicker
   ]
 })
 export class AppModule {}

@@ -15,8 +15,8 @@
   <ion-list *ngFor="let room of roomList">
     <ion-item-sliding>
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="">
+        <ion-thumbnail item-start >
+          <img src="{{room.imageURL}}">
         </ion-thumbnail>
         <h2>{{room.name}}</h2>
         <p>Ubicación: {{room.location}}</p>
@@ -28,8 +28,8 @@
       </ion-item>
       <ion-item-options side="right">
           <button ion-button large (click)="addOrEditRoom(room)"><ion-icon name="md-create"></ion-icon></button>
-          <button ion-button large color="favorite" *ngIf="!room.isFavorite" (click)="toogleFavorite(room, true)"><ion-icon name="md-star"></ion-icon></button>
-          <button ion-button large color="unfavorite" *ngIf="room.isFavorite" (click)="toogleFavorite(room, false)"><ion-icon name="md-star"></ion-icon></button>
+          <button ion-button large color="favorite" *ngIf="!room.isFavorite" (click)="toggleFavorite(room, true)"><ion-icon name="md-star"></ion-icon></button>
+          <button ion-button large color="unfavorite" *ngIf="room.isFavorite" (click)="toggleFavorite(room, false)"><ion-icon name="md-star"></ion-icon></button>
           <button ion-button large color="danger" (click)="delete(room)"><ion-icon name="md-trash"></ion-icon></button>
       </ion-item-options>
     </ion-item-sliding>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {Location} from '../../app/model/location';
+import { Location } from '../../app/model/location';
 
 @Injectable()
 export class HttpLocationProvider {

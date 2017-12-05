@@ -19,7 +19,6 @@ export class HttpRoomProvider {
   }
 
   createRoom (id: string, room: any): Observable<Room> {
-    // Post couldn't be used because Firebase generated an Id that the app doesn't need
     return this.http.put<Room>(`${this.baseURL}/${id}.json`, room);
   }
 

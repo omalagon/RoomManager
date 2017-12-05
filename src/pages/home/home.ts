@@ -4,7 +4,8 @@ import { HttpRoomProvider } from '../../providers/http-room/http-room';
 import { Room } from '../../app/model/room';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { Refresher } from 'ionic-angular/components/refresher/refresher';
-import {CreateEditPage} from "../create-edit/create-edit";
+import { CreateEditPage } from '../create-edit/create-edit';
+import {Constants} from "../../app/model/constants";
 
 @Component({
   selector: 'page-home',
@@ -34,7 +35,7 @@ export class HomePage {
     this._httpRoomProvider.getAllRooms().subscribe(
       (response: any) => {
         loading.dismiss();
-        this.roomList = new Array<Room>();
+        this.roomList = [];
         this.noDataFound = response === null;
         if (response !== null) {
           let list: any = response;
@@ -68,7 +69,7 @@ export class HomePage {
     this.loadRooms();
   }
 
-  toogleFavorite( selectedRoom: Room, fav: boolean): void {
+  toggleFavorite( selectedRoom: Room, fav: boolean): void {
     selectedRoom.isFavorite = fav;
     let toaster: Toast;
     this._httpRoomProvider.editRoom(selectedRoom.id, selectedRoom).subscribe(
@@ -80,7 +81,7 @@ export class HomePage {
         toaster = this.buildToaster(message);
       },
       (error) => {
-        toaster = this.buildToaster('Ocurrió un error');
+        toaster = this.buildToaster(Constants.ERROR);
       },
       () => {
         toaster.present();
@@ -105,7 +106,7 @@ export class HomePage {
           handler: () => {
             this._httpRoomProvider.deleteRoom(selectedRoom.id).subscribe(
               (response) => toaster = this.buildToaster(`La sala ${selectedRoom.name} ha sido eliminada!`),
-              (error) => toaster = this.buildToaster(`Ocurrió un error eliminando la sala ${selectedRoom.name}`),
+              (error) => toaster = this.buildToaster(`${Constants.ERROR} eliminando la sala ${selectedRoom.name}`),
               () => {
                 toaster.present();
                 this.loadRooms();

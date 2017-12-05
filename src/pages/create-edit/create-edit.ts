@@ -4,6 +4,8 @@ import {Room} from "../../app/model/room";
 import {HttpRoomProvider} from "../../providers/http-room/http-room";
 import {Location} from '../../app/model/location';
 import { HttpLocationProvider } from '../../providers/http-location/http-location';
+import {ImagePicker} from "@ionic-native/image-picker";
+import {Constants} from "../../app/model/constants";
 
 @IonicPage()
 @Component({
@@ -16,13 +18,13 @@ export class CreateEditPage {
   private _title: string;
   private _toast: Toast;
   private _locations: Array<Location>;
-  
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private _httpRoomProvider: HttpRoomProvider,
               private _httpLocationProvider: HttpLocationProvider,
-              private _toastCtrl: ToastController) {
+              private _toastCtrl: ToastController,
+              private _imagePicker: ImagePicker) {
       this.init();
   }
 
@@ -45,7 +47,7 @@ export class CreateEditPage {
             this.locations.push(list[key]);
         }
       },
-      (error) => console.log('Error obteniendo las ubicaciones')
+      (error) => {}
     );
   }
 
@@ -77,8 +79,19 @@ export class CreateEditPage {
         toast = this.buildToaster(message);
         this.goBack();
       },
-      (error) => toast = this.buildToaster('Ocurrió un error'),
+      (error) => toast = this.buildToaster(Constants.ERROR),
       () => toast.present()
+    );
+  }
+
+  selectImage () {
+    this._imagePicker.getPictures({maximumImagesCount: 1}).then(
+      (results) => {
+        for (let index = 0; index < results.length; index++) {
+          this.room.imageURL = results[index];
+        }
+      },
+      (error) => console.log(Constants.ERROR)
     );
   }
 
@@ -88,7 +101,7 @@ export class CreateEditPage {
   }
 
   private handleError (error: any): void {
-    this.toast = this.buildToaster('Ocurrió un error');
+    this.toast = this.buildToaster(Constants.ERROR);
   }
 
   private complete (): void {
@@ -143,5 +156,5 @@ export class CreateEditPage {
 	public set locations(value: Array<Location>) {
 		this._locations = value;
 	}
-  
+
 }
