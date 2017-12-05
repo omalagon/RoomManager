@@ -73,15 +73,6 @@ export class CreateEditPage {
         () => this.complete()
       );
     }
-
-    this._httpRoomProvider.createRoom(id, room).subscribe(
-      (response) => {
-        toast = this.buildToaster(message);
-        this.goBack();
-      },
-      (error) => toast = this.buildToaster(Constants.ERROR),
-      () => toast.present()
-    );
   }
 
   selectImage () {
