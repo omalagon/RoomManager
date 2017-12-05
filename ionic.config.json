@@ -1,6 +1,8 @@
 {
   "name": "RoomManager",
-  "app_id": "",
+  "app_id": "0ea72c40",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
